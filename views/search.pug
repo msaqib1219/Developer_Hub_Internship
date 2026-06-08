@@ -1,0 +1,21 @@
+extends layout.pug
+
+block content
+  .container
+    h1= title
+
+    if error
+      p.error= error
+
+    form(action="/search", method="POST")
+      label(for="searchTerm") Search Username:
+      input(type="text", id="searchTerm", name="searchTerm", value=searchTerm || '', placeholder="Enter username part")
+      input(type="submit", value="Search")
+
+    if users.length > 0
+      h2 Search Results for "#{searchTerm}"
+      ul
+        each user in users
+          li User ID: #{user.id}, Username: #{user.username}, Email: #{user.email}
+    else if searchTerm
+      p No users found matching "#{searchTerm}".

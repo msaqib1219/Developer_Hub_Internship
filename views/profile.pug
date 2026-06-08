@@ -1,0 +1,12 @@
+extends layout.pug
+
+block content
+  .container
+    h1= title
+    p.success= message
+
+    h2 Change Your Email
+    form(action="/change-email", method="POST")
+      label(for="email") New Email:
+      input(type="hidden" name="_csrf" value=csrfToken)
+      input(type="submit", value="Change Email")

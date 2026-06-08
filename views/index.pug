@@ -1,0 +1,15 @@
+extends layout.pug
+
+block content
+  .container
+    h1= title
+    p= message
+    p This application is intentionally vulnerable for educational purposes.
+    p Explore the following sections to find vulnerabilities:
+    ul
+      li
+        a(href='/search') User Search (SQL Injection)
+      li
+        a(href='/profile') User Profile (CSRF)
+      li
+        a(href='/comments') Comments Section (XSS)
