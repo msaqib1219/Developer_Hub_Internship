@@ -13,9 +13,12 @@ app.set('views', path.join(__dirname, 'views'));
 
 // Middleware
 const cookieParser = require('cookie-parser');
-app.use(cookieParser());
+app.use(cookieParser('secret'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public'))); // For static assets if needed
+
+// Initialize CSRF protection - uses cookies to store token
+const csrfProtection = csrf({ cookie: true });
 
 // Initialize SQLite database
 const db = new sqlite3.Database('./vulnerable_database.db', (err) => {
@@ -85,11 +88,9 @@ app.post('/search', (req, res) => {
 });
 
 // CSRF Vulnerability: Change Email Form
-app.get('/profile', (req, res) => {
+app.get('/profile', csrfProtection, (req, res) => {
     res.render('profile', { title: 'User Profile', message: 'Change your email below.', csrfToken: req.csrfToken(), userEmail: 'user@example.com' });
 });
-
-const csrfProtection = csrf({ cookie: false });
 
 app.post('/change-email', csrfProtection, (req, res) => {
     const newEmail = req.body.email;

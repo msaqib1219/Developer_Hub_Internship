@@ -8,5 +8,6 @@ block content
     h2 Change Your Email
     form(action="/change-email", method="POST")
       label(for="email") New Email:
+      input(type="email", id="email", name="email", placeholder="Enter new email", required)
       input(type="hidden" name="_csrf" value=csrfToken)
       input(type="submit", value="Change Email")

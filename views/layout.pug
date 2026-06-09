@@ -2,7 +2,7 @@ doctype html
 html
   head
     title= title
-    style
+    style.
       body { font-family: sans-serif; margin: 20px; background-color: #f4f4f4; color: #333; }
       h1, h2 { color: #0056b3; }
       nav a { margin-right: 15px; text-decoration: none; color: #007bff; }
@@ -17,3 +17,10 @@ html
       .comment { border: 1px solid #eee; padding: 10px; margin-bottom: 10px; border-radius: 5px; background-color: #f9f9f9; }
       .comment-author { font-weight: bold; color: #555; }
       .comment-content { margin-top: 5px; }
+  body
+    nav
+      a(href='/') Home
+      a(href='/search') Search
+      a(href='/profile') Profile
+      a(href='/comments') Comments
+    block content
